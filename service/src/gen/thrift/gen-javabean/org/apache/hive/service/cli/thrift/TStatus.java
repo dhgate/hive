@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -46,11 +45,15 @@ public class TStatus implements org.apache.thrift.TBase<TStatus, TStatus._Fields
     schemes.put(TupleScheme.class, new TStatusTupleSchemeFactory());
   }
 
-  private TStatusCode statusCode; // required
-  private List<String> infoMessages; // optional
-  private String sqlState; // optional
-  private int errorCode; // optional
-  private String errorMessage; // optional
+  /**
+   * 
+   * @see TStatusCode
+   */
+  public TStatusCode statusCode; // required
+  public List<String> infoMessages; // optional
+  public String sqlState; // optional
+  public int errorCode; // optional
+  public String errorMessage; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -208,8 +211,9 @@ public class TStatus implements org.apache.thrift.TBase<TStatus, TStatus._Fields
    * 
    * @see TStatusCode
    */
-  public void setStatusCode(TStatusCode statusCode) {
+  public TStatus setStatusCode(TStatusCode statusCode) {
     this.statusCode = statusCode;
+    return this;
   }
 
   public void unsetStatusCode() {
@@ -246,8 +250,9 @@ public class TStatus implements org.apache.thrift.TBase<TStatus, TStatus._Fields
     return this.infoMessages;
   }
 
-  public void setInfoMessages(List<String> infoMessages) {
+  public TStatus setInfoMessages(List<String> infoMessages) {
     this.infoMessages = infoMessages;
+    return this;
   }
 
   public void unsetInfoMessages() {
@@ -269,8 +274,9 @@ public class TStatus implements org.apache.thrift.TBase<TStatus, TStatus._Fields
     return this.sqlState;
   }
 
-  public void setSqlState(String sqlState) {
+  public TStatus setSqlState(String sqlState) {
     this.sqlState = sqlState;
+    return this;
   }
 
   public void unsetSqlState() {
@@ -292,9 +298,10 @@ public class TStatus implements org.apache.thrift.TBase<TStatus, TStatus._Fields
     return this.errorCode;
   }
 
-  public void setErrorCode(int errorCode) {
+  public TStatus setErrorCode(int errorCode) {
     this.errorCode = errorCode;
     setErrorCodeIsSet(true);
+    return this;
   }
 
   public void unsetErrorCode() {
@@ -314,8 +321,9 @@ public class TStatus implements org.apache.thrift.TBase<TStatus, TStatus._Fields
     return this.errorMessage;
   }
 
-  public void setErrorMessage(String errorMessage) {
+  public TStatus setErrorMessage(String errorMessage) {
     this.errorMessage = errorMessage;
+    return this;
   }
 
   public void unsetErrorMessage() {
@@ -483,34 +491,7 @@ public class TStatus implements org.apache.thrift.TBase<TStatus, TStatus._Fields
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_statusCode = true && (isSetStatusCode());
-    builder.append(present_statusCode);
-    if (present_statusCode)
-      builder.append(statusCode.getValue());
-
-    boolean present_infoMessages = true && (isSetInfoMessages());
-    builder.append(present_infoMessages);
-    if (present_infoMessages)
-      builder.append(infoMessages);
-
-    boolean present_sqlState = true && (isSetSqlState());
-    builder.append(present_sqlState);
-    if (present_sqlState)
-      builder.append(sqlState);
-
-    boolean present_errorCode = true && (isSetErrorCode());
-    builder.append(present_errorCode);
-    if (present_errorCode)
-      builder.append(errorCode);
-
-    boolean present_errorMessage = true && (isSetErrorMessage());
-    builder.append(present_errorMessage);
-    if (present_errorMessage)
-      builder.append(errorMessage);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TStatus other) {
@@ -640,10 +621,9 @@ public class TStatus implements org.apache.thrift.TBase<TStatus, TStatus._Fields
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetStatusCode()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'statusCode' is unset! Struct:" + toString());
+    if (statusCode == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'statusCode' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
   }
 
@@ -739,6 +719,8 @@ public class TStatus implements org.apache.thrift.TBase<TStatus, TStatus._Fields
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

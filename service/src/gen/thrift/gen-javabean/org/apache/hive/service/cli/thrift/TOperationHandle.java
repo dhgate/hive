@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -45,10 +44,14 @@ public class TOperationHandle implements org.apache.thrift.TBase<TOperationHandl
     schemes.put(TupleScheme.class, new TOperationHandleTupleSchemeFactory());
   }
 
-  private THandleIdentifier operationId; // required
-  private TOperationType operationType; // required
-  private boolean hasResultSet; // required
-  private double modifiedRowCount; // optional
+  public THandleIdentifier operationId; // required
+  /**
+   * 
+   * @see TOperationType
+   */
+  public TOperationType operationType; // required
+  public boolean hasResultSet; // required
+  public double modifiedRowCount; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -189,8 +192,9 @@ public class TOperationHandle implements org.apache.thrift.TBase<TOperationHandl
     return this.operationId;
   }
 
-  public void setOperationId(THandleIdentifier operationId) {
+  public TOperationHandle setOperationId(THandleIdentifier operationId) {
     this.operationId = operationId;
+    return this;
   }
 
   public void unsetOperationId() {
@@ -220,8 +224,9 @@ public class TOperationHandle implements org.apache.thrift.TBase<TOperationHandl
    * 
    * @see TOperationType
    */
-  public void setOperationType(TOperationType operationType) {
+  public TOperationHandle setOperationType(TOperationType operationType) {
     this.operationType = operationType;
+    return this;
   }
 
   public void unsetOperationType() {
@@ -243,9 +248,10 @@ public class TOperationHandle implements org.apache.thrift.TBase<TOperationHandl
     return this.hasResultSet;
   }
 
-  public void setHasResultSet(boolean hasResultSet) {
+  public TOperationHandle setHasResultSet(boolean hasResultSet) {
     this.hasResultSet = hasResultSet;
     setHasResultSetIsSet(true);
+    return this;
   }
 
   public void unsetHasResultSet() {
@@ -265,9 +271,10 @@ public class TOperationHandle implements org.apache.thrift.TBase<TOperationHandl
     return this.modifiedRowCount;
   }
 
-  public void setModifiedRowCount(double modifiedRowCount) {
+  public TOperationHandle setModifiedRowCount(double modifiedRowCount) {
     this.modifiedRowCount = modifiedRowCount;
     setModifiedRowCountIsSet(true);
+    return this;
   }
 
   public void unsetModifiedRowCount() {
@@ -411,29 +418,7 @@ public class TOperationHandle implements org.apache.thrift.TBase<TOperationHandl
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_operationId = true && (isSetOperationId());
-    builder.append(present_operationId);
-    if (present_operationId)
-      builder.append(operationId);
-
-    boolean present_operationType = true && (isSetOperationType());
-    builder.append(present_operationType);
-    if (present_operationType)
-      builder.append(operationType.getValue());
-
-    boolean present_hasResultSet = true;
-    builder.append(present_hasResultSet);
-    if (present_hasResultSet)
-      builder.append(hasResultSet);
-
-    boolean present_modifiedRowCount = true && (isSetModifiedRowCount());
-    builder.append(present_modifiedRowCount);
-    if (present_modifiedRowCount)
-      builder.append(modifiedRowCount);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TOperationHandle other) {
@@ -535,18 +520,13 @@ public class TOperationHandle implements org.apache.thrift.TBase<TOperationHandl
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetOperationId()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'operationId' is unset! Struct:" + toString());
+    if (operationId == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'operationId' was not present! Struct: " + toString());
     }
-
-    if (!isSetOperationType()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'operationType' is unset! Struct:" + toString());
+    if (operationType == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'operationType' was not present! Struct: " + toString());
     }
-
-    if (!isSetHasResultSet()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'hasResultSet' is unset! Struct:" + toString());
-    }
-
+    // alas, we cannot check 'hasResultSet' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
     if (operationId != null) {
       operationId.validate();
@@ -628,6 +608,11 @@ public class TOperationHandle implements org.apache.thrift.TBase<TOperationHandl
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      if (!struct.isSetHasResultSet()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'hasResultSet' was not found in serialized data! Struct: " + toString());
+      }
       struct.validate();
     }
 

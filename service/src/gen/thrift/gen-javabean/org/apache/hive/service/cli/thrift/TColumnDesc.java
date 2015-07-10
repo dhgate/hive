@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -45,10 +44,10 @@ public class TColumnDesc implements org.apache.thrift.TBase<TColumnDesc, TColumn
     schemes.put(TupleScheme.class, new TColumnDescTupleSchemeFactory());
   }
 
-  private String columnName; // required
-  private TTypeDesc typeDesc; // required
-  private int position; // required
-  private String comment; // optional
+  public String columnName; // required
+  public TTypeDesc typeDesc; // required
+  public int position; // required
+  public String comment; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -185,8 +184,9 @@ public class TColumnDesc implements org.apache.thrift.TBase<TColumnDesc, TColumn
     return this.columnName;
   }
 
-  public void setColumnName(String columnName) {
+  public TColumnDesc setColumnName(String columnName) {
     this.columnName = columnName;
+    return this;
   }
 
   public void unsetColumnName() {
@@ -208,8 +208,9 @@ public class TColumnDesc implements org.apache.thrift.TBase<TColumnDesc, TColumn
     return this.typeDesc;
   }
 
-  public void setTypeDesc(TTypeDesc typeDesc) {
+  public TColumnDesc setTypeDesc(TTypeDesc typeDesc) {
     this.typeDesc = typeDesc;
+    return this;
   }
 
   public void unsetTypeDesc() {
@@ -231,9 +232,10 @@ public class TColumnDesc implements org.apache.thrift.TBase<TColumnDesc, TColumn
     return this.position;
   }
 
-  public void setPosition(int position) {
+  public TColumnDesc setPosition(int position) {
     this.position = position;
     setPositionIsSet(true);
+    return this;
   }
 
   public void unsetPosition() {
@@ -253,8 +255,9 @@ public class TColumnDesc implements org.apache.thrift.TBase<TColumnDesc, TColumn
     return this.comment;
   }
 
-  public void setComment(String comment) {
+  public TColumnDesc setComment(String comment) {
     this.comment = comment;
+    return this;
   }
 
   public void unsetComment() {
@@ -400,29 +403,7 @@ public class TColumnDesc implements org.apache.thrift.TBase<TColumnDesc, TColumn
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_columnName = true && (isSetColumnName());
-    builder.append(present_columnName);
-    if (present_columnName)
-      builder.append(columnName);
-
-    boolean present_typeDesc = true && (isSetTypeDesc());
-    builder.append(present_typeDesc);
-    if (present_typeDesc)
-      builder.append(typeDesc);
-
-    boolean present_position = true;
-    builder.append(present_position);
-    if (present_position)
-      builder.append(position);
-
-    boolean present_comment = true && (isSetComment());
-    builder.append(present_comment);
-    if (present_comment)
-      builder.append(comment);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TColumnDesc other) {
@@ -528,18 +509,13 @@ public class TColumnDesc implements org.apache.thrift.TBase<TColumnDesc, TColumn
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetColumnName()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'columnName' is unset! Struct:" + toString());
+    if (columnName == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'columnName' was not present! Struct: " + toString());
     }
-
-    if (!isSetTypeDesc()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'typeDesc' is unset! Struct:" + toString());
+    if (typeDesc == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'typeDesc' was not present! Struct: " + toString());
     }
-
-    if (!isSetPosition()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'position' is unset! Struct:" + toString());
-    }
-
+    // alas, we cannot check 'position' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
     if (typeDesc != null) {
       typeDesc.validate();
@@ -621,6 +597,11 @@ public class TColumnDesc implements org.apache.thrift.TBase<TColumnDesc, TColumn
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      if (!struct.isSetPosition()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'position' was not found in serialized data! Struct: " + toString());
+      }
       struct.validate();
     }
 

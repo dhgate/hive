@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TRow implements org.apache.thrift.TBase<TRow, TRow._Fields>, java.i
     schemes.put(TupleScheme.class, new TRowTupleSchemeFactory());
   }
 
-  private List<TColumnValue> colVals; // required
+  public List<TColumnValue> colVals; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -164,8 +163,9 @@ public class TRow implements org.apache.thrift.TBase<TRow, TRow._Fields>, java.i
     return this.colVals;
   }
 
-  public void setColVals(List<TColumnValue> colVals) {
+  public TRow setColVals(List<TColumnValue> colVals) {
     this.colVals = colVals;
+    return this;
   }
 
   public void unsetColVals() {
@@ -245,14 +245,7 @@ public class TRow implements org.apache.thrift.TBase<TRow, TRow._Fields>, java.i
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_colVals = true && (isSetColVals());
-    builder.append(present_colVals);
-    if (present_colVals)
-      builder.append(colVals);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TRow other) {
@@ -306,10 +299,9 @@ public class TRow implements org.apache.thrift.TBase<TRow, TRow._Fields>, java.i
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetColVals()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'colVals' is unset! Struct:" + toString());
+    if (colVals == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'colVals' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
   }
 
@@ -372,6 +364,8 @@ public class TRow implements org.apache.thrift.TBase<TRow, TRow._Fields>, java.i
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

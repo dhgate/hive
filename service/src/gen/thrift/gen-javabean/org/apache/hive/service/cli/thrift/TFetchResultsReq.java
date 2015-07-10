@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -44,9 +43,13 @@ public class TFetchResultsReq implements org.apache.thrift.TBase<TFetchResultsRe
     schemes.put(TupleScheme.class, new TFetchResultsReqTupleSchemeFactory());
   }
 
-  private TOperationHandle operationHandle; // required
-  private TFetchOrientation orientation; // required
-  private long maxRows; // required
+  public TOperationHandle operationHandle; // required
+  /**
+   * 
+   * @see TFetchOrientation
+   */
+  public TFetchOrientation orientation; // required
+  public long maxRows; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -180,8 +183,9 @@ public class TFetchResultsReq implements org.apache.thrift.TBase<TFetchResultsRe
     return this.operationHandle;
   }
 
-  public void setOperationHandle(TOperationHandle operationHandle) {
+  public TFetchResultsReq setOperationHandle(TOperationHandle operationHandle) {
     this.operationHandle = operationHandle;
+    return this;
   }
 
   public void unsetOperationHandle() {
@@ -211,8 +215,9 @@ public class TFetchResultsReq implements org.apache.thrift.TBase<TFetchResultsRe
    * 
    * @see TFetchOrientation
    */
-  public void setOrientation(TFetchOrientation orientation) {
+  public TFetchResultsReq setOrientation(TFetchOrientation orientation) {
     this.orientation = orientation;
+    return this;
   }
 
   public void unsetOrientation() {
@@ -234,9 +239,10 @@ public class TFetchResultsReq implements org.apache.thrift.TBase<TFetchResultsRe
     return this.maxRows;
   }
 
-  public void setMaxRows(long maxRows) {
+  public TFetchResultsReq setMaxRows(long maxRows) {
     this.maxRows = maxRows;
     setMaxRowsIsSet(true);
+    return this;
   }
 
   public void unsetMaxRows() {
@@ -358,24 +364,7 @@ public class TFetchResultsReq implements org.apache.thrift.TBase<TFetchResultsRe
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_operationHandle = true && (isSetOperationHandle());
-    builder.append(present_operationHandle);
-    if (present_operationHandle)
-      builder.append(operationHandle);
-
-    boolean present_orientation = true && (isSetOrientation());
-    builder.append(present_orientation);
-    if (present_orientation)
-      builder.append(orientation.getValue());
-
-    boolean present_maxRows = true;
-    builder.append(present_maxRows);
-    if (present_maxRows)
-      builder.append(maxRows);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TFetchResultsReq other) {
@@ -461,18 +450,13 @@ public class TFetchResultsReq implements org.apache.thrift.TBase<TFetchResultsRe
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetOperationHandle()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'operationHandle' is unset! Struct:" + toString());
+    if (operationHandle == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'operationHandle' was not present! Struct: " + toString());
     }
-
-    if (!isSetOrientation()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'orientation' is unset! Struct:" + toString());
+    if (orientation == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'orientation' was not present! Struct: " + toString());
     }
-
-    if (!isSetMaxRows()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'maxRows' is unset! Struct:" + toString());
-    }
-
+    // alas, we cannot check 'maxRows' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
     if (operationHandle != null) {
       operationHandle.validate();
@@ -546,6 +530,11 @@ public class TFetchResultsReq implements org.apache.thrift.TBase<TFetchResultsRe
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      if (!struct.isSetMaxRows()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'maxRows' was not found in serialized data! Struct: " + toString());
+      }
       struct.validate();
     }
 

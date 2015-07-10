@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -44,9 +43,9 @@ public class TFetchResultsResp implements org.apache.thrift.TBase<TFetchResultsR
     schemes.put(TupleScheme.class, new TFetchResultsRespTupleSchemeFactory());
   }
 
-  private TStatus status; // required
-  private boolean hasMoreRows; // optional
-  private TRowSet results; // optional
+  public TStatus status; // required
+  public boolean hasMoreRows; // optional
+  public TRowSet results; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -169,8 +168,9 @@ public class TFetchResultsResp implements org.apache.thrift.TBase<TFetchResultsR
     return this.status;
   }
 
-  public void setStatus(TStatus status) {
+  public TFetchResultsResp setStatus(TStatus status) {
     this.status = status;
+    return this;
   }
 
   public void unsetStatus() {
@@ -192,9 +192,10 @@ public class TFetchResultsResp implements org.apache.thrift.TBase<TFetchResultsR
     return this.hasMoreRows;
   }
 
-  public void setHasMoreRows(boolean hasMoreRows) {
+  public TFetchResultsResp setHasMoreRows(boolean hasMoreRows) {
     this.hasMoreRows = hasMoreRows;
     setHasMoreRowsIsSet(true);
+    return this;
   }
 
   public void unsetHasMoreRows() {
@@ -214,8 +215,9 @@ public class TFetchResultsResp implements org.apache.thrift.TBase<TFetchResultsR
     return this.results;
   }
 
-  public void setResults(TRowSet results) {
+  public TFetchResultsResp setResults(TRowSet results) {
     this.results = results;
+    return this;
   }
 
   public void unsetResults() {
@@ -339,24 +341,7 @@ public class TFetchResultsResp implements org.apache.thrift.TBase<TFetchResultsR
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_status = true && (isSetStatus());
-    builder.append(present_status);
-    if (present_status)
-      builder.append(status);
-
-    boolean present_hasMoreRows = true && (isSetHasMoreRows());
-    builder.append(present_hasMoreRows);
-    if (present_hasMoreRows)
-      builder.append(hasMoreRows);
-
-    boolean present_results = true && (isSetResults());
-    builder.append(present_results);
-    if (present_results)
-      builder.append(results);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TFetchResultsResp other) {
@@ -446,10 +431,9 @@ public class TFetchResultsResp implements org.apache.thrift.TBase<TFetchResultsR
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetStatus()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' is unset! Struct:" + toString());
+    if (status == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (status != null) {
       status.validate();
@@ -527,6 +511,8 @@ public class TFetchResultsResp implements org.apache.thrift.TBase<TFetchResultsR
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

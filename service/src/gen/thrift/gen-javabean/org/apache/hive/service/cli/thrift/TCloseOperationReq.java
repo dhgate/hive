@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TCloseOperationReq implements org.apache.thrift.TBase<TCloseOperati
     schemes.put(TupleScheme.class, new TCloseOperationReqTupleSchemeFactory());
   }
 
-  private TOperationHandle operationHandle; // required
+  public TOperationHandle operationHandle; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -144,8 +143,9 @@ public class TCloseOperationReq implements org.apache.thrift.TBase<TCloseOperati
     return this.operationHandle;
   }
 
-  public void setOperationHandle(TOperationHandle operationHandle) {
+  public TCloseOperationReq setOperationHandle(TOperationHandle operationHandle) {
     this.operationHandle = operationHandle;
+    return this;
   }
 
   public void unsetOperationHandle() {
@@ -225,14 +225,7 @@ public class TCloseOperationReq implements org.apache.thrift.TBase<TCloseOperati
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_operationHandle = true && (isSetOperationHandle());
-    builder.append(present_operationHandle);
-    if (present_operationHandle)
-      builder.append(operationHandle);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TCloseOperationReq other) {
@@ -286,10 +279,9 @@ public class TCloseOperationReq implements org.apache.thrift.TBase<TCloseOperati
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetOperationHandle()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'operationHandle' is unset! Struct:" + toString());
+    if (operationHandle == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'operationHandle' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (operationHandle != null) {
       operationHandle.validate();
@@ -345,6 +337,8 @@ public class TCloseOperationReq implements org.apache.thrift.TBase<TCloseOperati
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

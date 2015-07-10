@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -45,10 +44,10 @@ public class TExecuteStatementReq implements org.apache.thrift.TBase<TExecuteSta
     schemes.put(TupleScheme.class, new TExecuteStatementReqTupleSchemeFactory());
   }
 
-  private TSessionHandle sessionHandle; // required
-  private String statement; // required
-  private Map<String,String> confOverlay; // optional
-  private boolean runAsync; // optional
+  public TSessionHandle sessionHandle; // required
+  public String statement; // required
+  public Map<String,String> confOverlay; // optional
+  public boolean runAsync; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -198,8 +197,9 @@ public class TExecuteStatementReq implements org.apache.thrift.TBase<TExecuteSta
     return this.sessionHandle;
   }
 
-  public void setSessionHandle(TSessionHandle sessionHandle) {
+  public TExecuteStatementReq setSessionHandle(TSessionHandle sessionHandle) {
     this.sessionHandle = sessionHandle;
+    return this;
   }
 
   public void unsetSessionHandle() {
@@ -221,8 +221,9 @@ public class TExecuteStatementReq implements org.apache.thrift.TBase<TExecuteSta
     return this.statement;
   }
 
-  public void setStatement(String statement) {
+  public TExecuteStatementReq setStatement(String statement) {
     this.statement = statement;
+    return this;
   }
 
   public void unsetStatement() {
@@ -255,8 +256,9 @@ public class TExecuteStatementReq implements org.apache.thrift.TBase<TExecuteSta
     return this.confOverlay;
   }
 
-  public void setConfOverlay(Map<String,String> confOverlay) {
+  public TExecuteStatementReq setConfOverlay(Map<String,String> confOverlay) {
     this.confOverlay = confOverlay;
+    return this;
   }
 
   public void unsetConfOverlay() {
@@ -278,9 +280,10 @@ public class TExecuteStatementReq implements org.apache.thrift.TBase<TExecuteSta
     return this.runAsync;
   }
 
-  public void setRunAsync(boolean runAsync) {
+  public TExecuteStatementReq setRunAsync(boolean runAsync) {
     this.runAsync = runAsync;
     setRunAsyncIsSet(true);
+    return this;
   }
 
   public void unsetRunAsync() {
@@ -424,29 +427,7 @@ public class TExecuteStatementReq implements org.apache.thrift.TBase<TExecuteSta
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_sessionHandle = true && (isSetSessionHandle());
-    builder.append(present_sessionHandle);
-    if (present_sessionHandle)
-      builder.append(sessionHandle);
-
-    boolean present_statement = true && (isSetStatement());
-    builder.append(present_statement);
-    if (present_statement)
-      builder.append(statement);
-
-    boolean present_confOverlay = true && (isSetConfOverlay());
-    builder.append(present_confOverlay);
-    if (present_confOverlay)
-      builder.append(confOverlay);
-
-    boolean present_runAsync = true && (isSetRunAsync());
-    builder.append(present_runAsync);
-    if (present_runAsync)
-      builder.append(runAsync);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TExecuteStatementReq other) {
@@ -554,14 +535,12 @@ public class TExecuteStatementReq implements org.apache.thrift.TBase<TExecuteSta
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetSessionHandle()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' is unset! Struct:" + toString());
+    if (sessionHandle == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' was not present! Struct: " + toString());
     }
-
-    if (!isSetStatement()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'statement' is unset! Struct:" + toString());
+    if (statement == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'statement' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (sessionHandle != null) {
       sessionHandle.validate();
@@ -655,6 +634,8 @@ public class TExecuteStatementReq implements org.apache.thrift.TBase<TExecuteSta
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

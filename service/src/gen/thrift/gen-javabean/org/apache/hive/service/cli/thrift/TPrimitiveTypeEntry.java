@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -43,8 +42,12 @@ public class TPrimitiveTypeEntry implements org.apache.thrift.TBase<TPrimitiveTy
     schemes.put(TupleScheme.class, new TPrimitiveTypeEntryTupleSchemeFactory());
   }
 
-  private TTypeId type; // required
-  private TTypeQualifiers typeQualifiers; // optional
+  /**
+   * 
+   * @see TTypeId
+   */
+  public TTypeId type; // required
+  public TTypeQualifiers typeQualifiers; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -168,8 +171,9 @@ public class TPrimitiveTypeEntry implements org.apache.thrift.TBase<TPrimitiveTy
    * 
    * @see TTypeId
    */
-  public void setType(TTypeId type) {
+  public TPrimitiveTypeEntry setType(TTypeId type) {
     this.type = type;
+    return this;
   }
 
   public void unsetType() {
@@ -191,8 +195,9 @@ public class TPrimitiveTypeEntry implements org.apache.thrift.TBase<TPrimitiveTy
     return this.typeQualifiers;
   }
 
-  public void setTypeQualifiers(TTypeQualifiers typeQualifiers) {
+  public TPrimitiveTypeEntry setTypeQualifiers(TTypeQualifiers typeQualifiers) {
     this.typeQualifiers = typeQualifiers;
+    return this;
   }
 
   public void unsetTypeQualifiers() {
@@ -294,19 +299,7 @@ public class TPrimitiveTypeEntry implements org.apache.thrift.TBase<TPrimitiveTy
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_type = true && (isSetType());
-    builder.append(present_type);
-    if (present_type)
-      builder.append(type.getValue());
-
-    boolean present_typeQualifiers = true && (isSetTypeQualifiers());
-    builder.append(present_typeQualifiers);
-    if (present_typeQualifiers)
-      builder.append(typeQualifiers);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TPrimitiveTypeEntry other) {
@@ -380,10 +373,9 @@ public class TPrimitiveTypeEntry implements org.apache.thrift.TBase<TPrimitiveTy
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetType()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'type' is unset! Struct:" + toString());
+    if (type == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'type' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (typeQualifiers != null) {
       typeQualifiers.validate();
@@ -447,6 +439,8 @@ public class TPrimitiveTypeEntry implements org.apache.thrift.TBase<TPrimitiveTy
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

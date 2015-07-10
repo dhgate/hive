@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -43,8 +42,12 @@ public class TGetInfoReq implements org.apache.thrift.TBase<TGetInfoReq, TGetInf
     schemes.put(TupleScheme.class, new TGetInfoReqTupleSchemeFactory());
   }
 
-  private TSessionHandle sessionHandle; // required
-  private TGetInfoType infoType; // required
+  public TSessionHandle sessionHandle; // required
+  /**
+   * 
+   * @see TGetInfoType
+   */
+  public TGetInfoType infoType; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -161,8 +164,9 @@ public class TGetInfoReq implements org.apache.thrift.TBase<TGetInfoReq, TGetInf
     return this.sessionHandle;
   }
 
-  public void setSessionHandle(TSessionHandle sessionHandle) {
+  public TGetInfoReq setSessionHandle(TSessionHandle sessionHandle) {
     this.sessionHandle = sessionHandle;
+    return this;
   }
 
   public void unsetSessionHandle() {
@@ -192,8 +196,9 @@ public class TGetInfoReq implements org.apache.thrift.TBase<TGetInfoReq, TGetInf
    * 
    * @see TGetInfoType
    */
-  public void setInfoType(TGetInfoType infoType) {
+  public TGetInfoReq setInfoType(TGetInfoType infoType) {
     this.infoType = infoType;
+    return this;
   }
 
   public void unsetInfoType() {
@@ -295,19 +300,7 @@ public class TGetInfoReq implements org.apache.thrift.TBase<TGetInfoReq, TGetInf
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_sessionHandle = true && (isSetSessionHandle());
-    builder.append(present_sessionHandle);
-    if (present_sessionHandle)
-      builder.append(sessionHandle);
-
-    boolean present_infoType = true && (isSetInfoType());
-    builder.append(present_infoType);
-    if (present_infoType)
-      builder.append(infoType.getValue());
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TGetInfoReq other) {
@@ -379,14 +372,12 @@ public class TGetInfoReq implements org.apache.thrift.TBase<TGetInfoReq, TGetInf
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetSessionHandle()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' is unset! Struct:" + toString());
+    if (sessionHandle == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' was not present! Struct: " + toString());
     }
-
-    if (!isSetInfoType()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'infoType' is unset! Struct:" + toString());
+    if (infoType == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'infoType' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (sessionHandle != null) {
       sessionHandle.validate();
@@ -450,6 +441,8 @@ public class TGetInfoReq implements org.apache.thrift.TBase<TGetInfoReq, TGetInf
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

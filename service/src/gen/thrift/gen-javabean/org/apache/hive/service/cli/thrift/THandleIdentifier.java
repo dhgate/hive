@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -43,8 +42,8 @@ public class THandleIdentifier implements org.apache.thrift.TBase<THandleIdentif
     schemes.put(TupleScheme.class, new THandleIdentifierTupleSchemeFactory());
   }
 
-  private ByteBuffer guid; // required
-  private ByteBuffer secret; // required
+  public ByteBuffer guid; // required
+  public ByteBuffer secret; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -164,12 +163,14 @@ public class THandleIdentifier implements org.apache.thrift.TBase<THandleIdentif
     return guid;
   }
 
-  public void setGuid(byte[] guid) {
+  public THandleIdentifier setGuid(byte[] guid) {
     setGuid(guid == null ? (ByteBuffer)null : ByteBuffer.wrap(guid));
+    return this;
   }
 
-  public void setGuid(ByteBuffer guid) {
+  public THandleIdentifier setGuid(ByteBuffer guid) {
     this.guid = guid;
+    return this;
   }
 
   public void unsetGuid() {
@@ -196,12 +197,14 @@ public class THandleIdentifier implements org.apache.thrift.TBase<THandleIdentif
     return secret;
   }
 
-  public void setSecret(byte[] secret) {
+  public THandleIdentifier setSecret(byte[] secret) {
     setSecret(secret == null ? (ByteBuffer)null : ByteBuffer.wrap(secret));
+    return this;
   }
 
-  public void setSecret(ByteBuffer secret) {
+  public THandleIdentifier setSecret(ByteBuffer secret) {
     this.secret = secret;
+    return this;
   }
 
   public void unsetSecret() {
@@ -303,19 +306,7 @@ public class THandleIdentifier implements org.apache.thrift.TBase<THandleIdentif
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_guid = true && (isSetGuid());
-    builder.append(present_guid);
-    if (present_guid)
-      builder.append(guid);
-
-    boolean present_secret = true && (isSetSecret());
-    builder.append(present_secret);
-    if (present_secret)
-      builder.append(secret);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(THandleIdentifier other) {
@@ -387,14 +378,12 @@ public class THandleIdentifier implements org.apache.thrift.TBase<THandleIdentif
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetGuid()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'guid' is unset! Struct:" + toString());
+    if (guid == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'guid' was not present! Struct: " + toString());
     }
-
-    if (!isSetSecret()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'secret' is unset! Struct:" + toString());
+    if (secret == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'secret' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
   }
 
@@ -454,6 +443,8 @@ public class THandleIdentifier implements org.apache.thrift.TBase<THandleIdentif
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TGetTableTypesReq implements org.apache.thrift.TBase<TGetTableTypes
     schemes.put(TupleScheme.class, new TGetTableTypesReqTupleSchemeFactory());
   }
 
-  private TSessionHandle sessionHandle; // required
+  public TSessionHandle sessionHandle; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -144,8 +143,9 @@ public class TGetTableTypesReq implements org.apache.thrift.TBase<TGetTableTypes
     return this.sessionHandle;
   }
 
-  public void setSessionHandle(TSessionHandle sessionHandle) {
+  public TGetTableTypesReq setSessionHandle(TSessionHandle sessionHandle) {
     this.sessionHandle = sessionHandle;
+    return this;
   }
 
   public void unsetSessionHandle() {
@@ -225,14 +225,7 @@ public class TGetTableTypesReq implements org.apache.thrift.TBase<TGetTableTypes
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_sessionHandle = true && (isSetSessionHandle());
-    builder.append(present_sessionHandle);
-    if (present_sessionHandle)
-      builder.append(sessionHandle);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TGetTableTypesReq other) {
@@ -286,10 +279,9 @@ public class TGetTableTypesReq implements org.apache.thrift.TBase<TGetTableTypes
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetSessionHandle()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' is unset! Struct:" + toString());
+    if (sessionHandle == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (sessionHandle != null) {
       sessionHandle.validate();
@@ -345,6 +337,8 @@ public class TGetTableTypesReq implements org.apache.thrift.TBase<TGetTableTypes
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

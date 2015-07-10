@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -45,10 +44,14 @@ public class TOpenSessionResp implements org.apache.thrift.TBase<TOpenSessionRes
     schemes.put(TupleScheme.class, new TOpenSessionRespTupleSchemeFactory());
   }
 
-  private TStatus status; // required
-  private TProtocolVersion serverProtocolVersion; // required
-  private TSessionHandle sessionHandle; // optional
-  private Map<String,String> configuration; // optional
+  public TStatus status; // required
+  /**
+   * 
+   * @see TProtocolVersion
+   */
+  public TProtocolVersion serverProtocolVersion; // required
+  public TSessionHandle sessionHandle; // optional
+  public Map<String,String> configuration; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -201,8 +204,9 @@ public class TOpenSessionResp implements org.apache.thrift.TBase<TOpenSessionRes
     return this.status;
   }
 
-  public void setStatus(TStatus status) {
+  public TOpenSessionResp setStatus(TStatus status) {
     this.status = status;
+    return this;
   }
 
   public void unsetStatus() {
@@ -232,8 +236,9 @@ public class TOpenSessionResp implements org.apache.thrift.TBase<TOpenSessionRes
    * 
    * @see TProtocolVersion
    */
-  public void setServerProtocolVersion(TProtocolVersion serverProtocolVersion) {
+  public TOpenSessionResp setServerProtocolVersion(TProtocolVersion serverProtocolVersion) {
     this.serverProtocolVersion = serverProtocolVersion;
+    return this;
   }
 
   public void unsetServerProtocolVersion() {
@@ -255,8 +260,9 @@ public class TOpenSessionResp implements org.apache.thrift.TBase<TOpenSessionRes
     return this.sessionHandle;
   }
 
-  public void setSessionHandle(TSessionHandle sessionHandle) {
+  public TOpenSessionResp setSessionHandle(TSessionHandle sessionHandle) {
     this.sessionHandle = sessionHandle;
+    return this;
   }
 
   public void unsetSessionHandle() {
@@ -289,8 +295,9 @@ public class TOpenSessionResp implements org.apache.thrift.TBase<TOpenSessionRes
     return this.configuration;
   }
 
-  public void setConfiguration(Map<String,String> configuration) {
+  public TOpenSessionResp setConfiguration(Map<String,String> configuration) {
     this.configuration = configuration;
+    return this;
   }
 
   public void unsetConfiguration() {
@@ -436,29 +443,7 @@ public class TOpenSessionResp implements org.apache.thrift.TBase<TOpenSessionRes
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_status = true && (isSetStatus());
-    builder.append(present_status);
-    if (present_status)
-      builder.append(status);
-
-    boolean present_serverProtocolVersion = true && (isSetServerProtocolVersion());
-    builder.append(present_serverProtocolVersion);
-    if (present_serverProtocolVersion)
-      builder.append(serverProtocolVersion.getValue());
-
-    boolean present_sessionHandle = true && (isSetSessionHandle());
-    builder.append(present_sessionHandle);
-    if (present_sessionHandle)
-      builder.append(sessionHandle);
-
-    boolean present_configuration = true && (isSetConfiguration());
-    builder.append(present_configuration);
-    if (present_configuration)
-      builder.append(configuration);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TOpenSessionResp other) {
@@ -570,14 +555,12 @@ public class TOpenSessionResp implements org.apache.thrift.TBase<TOpenSessionRes
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetStatus()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' is unset! Struct:" + toString());
+    if (status == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' was not present! Struct: " + toString());
     }
-
-    if (!isSetServerProtocolVersion()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'serverProtocolVersion' is unset! Struct:" + toString());
+    if (serverProtocolVersion == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'serverProtocolVersion' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (status != null) {
       status.validate();
@@ -673,6 +656,8 @@ public class TOpenSessionResp implements org.apache.thrift.TBase<TOpenSessionRes
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

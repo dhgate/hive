@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -45,10 +44,14 @@ public class TOpenSessionReq implements org.apache.thrift.TBase<TOpenSessionReq,
     schemes.put(TupleScheme.class, new TOpenSessionReqTupleSchemeFactory());
   }
 
-  private TProtocolVersion client_protocol; // required
-  private String username; // optional
-  private String password; // optional
-  private Map<String,String> configuration; // optional
+  /**
+   * 
+   * @see TProtocolVersion
+   */
+  public TProtocolVersion client_protocol; // required
+  public String username; // optional
+  public String password; // optional
+  public Map<String,String> configuration; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -207,8 +210,9 @@ public class TOpenSessionReq implements org.apache.thrift.TBase<TOpenSessionReq,
    * 
    * @see TProtocolVersion
    */
-  public void setClient_protocol(TProtocolVersion client_protocol) {
+  public TOpenSessionReq setClient_protocol(TProtocolVersion client_protocol) {
     this.client_protocol = client_protocol;
+    return this;
   }
 
   public void unsetClient_protocol() {
@@ -230,8 +234,9 @@ public class TOpenSessionReq implements org.apache.thrift.TBase<TOpenSessionReq,
     return this.username;
   }
 
-  public void setUsername(String username) {
+  public TOpenSessionReq setUsername(String username) {
     this.username = username;
+    return this;
   }
 
   public void unsetUsername() {
@@ -253,8 +258,9 @@ public class TOpenSessionReq implements org.apache.thrift.TBase<TOpenSessionReq,
     return this.password;
   }
 
-  public void setPassword(String password) {
+  public TOpenSessionReq setPassword(String password) {
     this.password = password;
+    return this;
   }
 
   public void unsetPassword() {
@@ -287,8 +293,9 @@ public class TOpenSessionReq implements org.apache.thrift.TBase<TOpenSessionReq,
     return this.configuration;
   }
 
-  public void setConfiguration(Map<String,String> configuration) {
+  public TOpenSessionReq setConfiguration(Map<String,String> configuration) {
     this.configuration = configuration;
+    return this;
   }
 
   public void unsetConfiguration() {
@@ -434,29 +441,7 @@ public class TOpenSessionReq implements org.apache.thrift.TBase<TOpenSessionReq,
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_client_protocol = true && (isSetClient_protocol());
-    builder.append(present_client_protocol);
-    if (present_client_protocol)
-      builder.append(client_protocol.getValue());
-
-    boolean present_username = true && (isSetUsername());
-    builder.append(present_username);
-    if (present_username)
-      builder.append(username);
-
-    boolean present_password = true && (isSetPassword());
-    builder.append(present_password);
-    if (present_password)
-      builder.append(password);
-
-    boolean present_configuration = true && (isSetConfiguration());
-    builder.append(present_configuration);
-    if (present_configuration)
-      builder.append(configuration);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TOpenSessionReq other) {
@@ -570,10 +555,9 @@ public class TOpenSessionReq implements org.apache.thrift.TBase<TOpenSessionReq,
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetClient_protocol()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'client_protocol' is unset! Struct:" + toString());
+    if (client_protocol == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'client_protocol' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
   }
 
@@ -661,6 +645,8 @@ public class TOpenSessionReq implements org.apache.thrift.TBase<TOpenSessionReq,
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

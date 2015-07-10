@@ -30,6 +30,7 @@ import org.apache.hive.service.cli.HiveSQLException;
 import org.apache.hive.service.cli.OperationHandle;
 import org.apache.hive.service.cli.RowSet;
 import org.apache.hive.service.cli.TableSchema;
+import org.apache.hive.service.cli.log.LogManager;
 
 public interface HiveSession extends HiveSessionBase {
 
@@ -157,4 +158,9 @@ public interface HiveSession extends HiveSessionBase {
 
   public void renewDelegationToken(HiveAuthFactory authFactory, String tokenStr)
       throws HiveSQLException;
+
+  public void setLogManager(LogManager logManager);
+
+  public LogManager getLogManager();
+
 }

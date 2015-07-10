@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -44,9 +43,9 @@ public class TRowSet implements org.apache.thrift.TBase<TRowSet, TRowSet._Fields
     schemes.put(TupleScheme.class, new TRowSetTupleSchemeFactory());
   }
 
-  private long startRowOffset; // required
-  private List<TRow> rows; // required
-  private List<TColumn> columns; // optional
+  public long startRowOffset; // required
+  public List<TRow> rows; // required
+  public List<TColumn> columns; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -182,9 +181,10 @@ public class TRowSet implements org.apache.thrift.TBase<TRowSet, TRowSet._Fields
     return this.startRowOffset;
   }
 
-  public void setStartRowOffset(long startRowOffset) {
+  public TRowSet setStartRowOffset(long startRowOffset) {
     this.startRowOffset = startRowOffset;
     setStartRowOffsetIsSet(true);
+    return this;
   }
 
   public void unsetStartRowOffset() {
@@ -219,8 +219,9 @@ public class TRowSet implements org.apache.thrift.TBase<TRowSet, TRowSet._Fields
     return this.rows;
   }
 
-  public void setRows(List<TRow> rows) {
+  public TRowSet setRows(List<TRow> rows) {
     this.rows = rows;
+    return this;
   }
 
   public void unsetRows() {
@@ -257,8 +258,9 @@ public class TRowSet implements org.apache.thrift.TBase<TRowSet, TRowSet._Fields
     return this.columns;
   }
 
-  public void setColumns(List<TColumn> columns) {
+  public TRowSet setColumns(List<TColumn> columns) {
     this.columns = columns;
+    return this;
   }
 
   public void unsetColumns() {
@@ -382,24 +384,7 @@ public class TRowSet implements org.apache.thrift.TBase<TRowSet, TRowSet._Fields
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_startRowOffset = true;
-    builder.append(present_startRowOffset);
-    if (present_startRowOffset)
-      builder.append(startRowOffset);
-
-    boolean present_rows = true && (isSetRows());
-    builder.append(present_rows);
-    if (present_rows)
-      builder.append(rows);
-
-    boolean present_columns = true && (isSetColumns());
-    builder.append(present_columns);
-    if (present_columns)
-      builder.append(columns);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TRowSet other) {
@@ -487,14 +472,10 @@ public class TRowSet implements org.apache.thrift.TBase<TRowSet, TRowSet._Fields
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetStartRowOffset()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'startRowOffset' is unset! Struct:" + toString());
+    // alas, we cannot check 'startRowOffset' because it's a primitive and you chose the non-beans generator.
+    if (rows == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'rows' was not present! Struct: " + toString());
     }
-
-    if (!isSetRows()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'rows' is unset! Struct:" + toString());
-    }
-
     // check for sub-struct validity
   }
 
@@ -586,6 +567,11 @@ public class TRowSet implements org.apache.thrift.TBase<TRowSet, TRowSet._Fields
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      if (!struct.isSetStartRowOffset()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'startRowOffset' was not found in serialized data! Struct: " + toString());
+      }
       struct.validate();
     }
 

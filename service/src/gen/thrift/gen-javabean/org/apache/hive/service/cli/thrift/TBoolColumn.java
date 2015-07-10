@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -43,8 +42,8 @@ public class TBoolColumn implements org.apache.thrift.TBase<TBoolColumn, TBoolCo
     schemes.put(TupleScheme.class, new TBoolColumnTupleSchemeFactory());
   }
 
-  private List<Boolean> values; // required
-  private ByteBuffer nulls; // required
+  public List<Boolean> values; // required
+  public ByteBuffer nulls; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -178,8 +177,9 @@ public class TBoolColumn implements org.apache.thrift.TBase<TBoolColumn, TBoolCo
     return this.values;
   }
 
-  public void setValues(List<Boolean> values) {
+  public TBoolColumn setValues(List<Boolean> values) {
     this.values = values;
+    return this;
   }
 
   public void unsetValues() {
@@ -206,12 +206,14 @@ public class TBoolColumn implements org.apache.thrift.TBase<TBoolColumn, TBoolCo
     return nulls;
   }
 
-  public void setNulls(byte[] nulls) {
+  public TBoolColumn setNulls(byte[] nulls) {
     setNulls(nulls == null ? (ByteBuffer)null : ByteBuffer.wrap(nulls));
+    return this;
   }
 
-  public void setNulls(ByteBuffer nulls) {
+  public TBoolColumn setNulls(ByteBuffer nulls) {
     this.nulls = nulls;
+    return this;
   }
 
   public void unsetNulls() {
@@ -313,19 +315,7 @@ public class TBoolColumn implements org.apache.thrift.TBase<TBoolColumn, TBoolCo
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_values = true && (isSetValues());
-    builder.append(present_values);
-    if (present_values)
-      builder.append(values);
-
-    boolean present_nulls = true && (isSetNulls());
-    builder.append(present_nulls);
-    if (present_nulls)
-      builder.append(nulls);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TBoolColumn other) {
@@ -397,14 +387,12 @@ public class TBoolColumn implements org.apache.thrift.TBase<TBoolColumn, TBoolCo
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetValues()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'values' is unset! Struct:" + toString());
+    if (values == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'values' was not present! Struct: " + toString());
     }
-
-    if (!isSetNulls()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'nulls' is unset! Struct:" + toString());
+    if (nulls == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'nulls' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
   }
 
@@ -474,6 +462,8 @@ public class TBoolColumn implements org.apache.thrift.TBase<TBoolColumn, TBoolCo
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

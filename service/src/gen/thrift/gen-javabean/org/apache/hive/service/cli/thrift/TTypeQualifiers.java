@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TTypeQualifiers implements org.apache.thrift.TBase<TTypeQualifiers,
     schemes.put(TupleScheme.class, new TTypeQualifiersTupleSchemeFactory());
   }
 
-  private Map<String,TTypeQualifierValue> qualifiers; // required
+  public Map<String,TTypeQualifierValue> qualifiers; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -169,8 +168,9 @@ public class TTypeQualifiers implements org.apache.thrift.TBase<TTypeQualifiers,
     return this.qualifiers;
   }
 
-  public void setQualifiers(Map<String,TTypeQualifierValue> qualifiers) {
+  public TTypeQualifiers setQualifiers(Map<String,TTypeQualifierValue> qualifiers) {
     this.qualifiers = qualifiers;
+    return this;
   }
 
   public void unsetQualifiers() {
@@ -250,14 +250,7 @@ public class TTypeQualifiers implements org.apache.thrift.TBase<TTypeQualifiers,
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_qualifiers = true && (isSetQualifiers());
-    builder.append(present_qualifiers);
-    if (present_qualifiers)
-      builder.append(qualifiers);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TTypeQualifiers other) {
@@ -311,10 +304,9 @@ public class TTypeQualifiers implements org.apache.thrift.TBase<TTypeQualifiers,
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetQualifiers()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'qualifiers' is unset! Struct:" + toString());
+    if (qualifiers == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'qualifiers' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
   }
 
@@ -379,6 +371,8 @@ public class TTypeQualifiers implements org.apache.thrift.TBase<TTypeQualifiers,
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

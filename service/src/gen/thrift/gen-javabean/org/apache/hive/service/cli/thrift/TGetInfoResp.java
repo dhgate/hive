@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -43,8 +42,8 @@ public class TGetInfoResp implements org.apache.thrift.TBase<TGetInfoResp, TGetI
     schemes.put(TupleScheme.class, new TGetInfoRespTupleSchemeFactory());
   }
 
-  private TStatus status; // required
-  private TGetInfoValue infoValue; // required
+  public TStatus status; // required
+  public TGetInfoValue infoValue; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -157,8 +156,9 @@ public class TGetInfoResp implements org.apache.thrift.TBase<TGetInfoResp, TGetI
     return this.status;
   }
 
-  public void setStatus(TStatus status) {
+  public TGetInfoResp setStatus(TStatus status) {
     this.status = status;
+    return this;
   }
 
   public void unsetStatus() {
@@ -180,8 +180,9 @@ public class TGetInfoResp implements org.apache.thrift.TBase<TGetInfoResp, TGetI
     return this.infoValue;
   }
 
-  public void setInfoValue(TGetInfoValue infoValue) {
+  public TGetInfoResp setInfoValue(TGetInfoValue infoValue) {
     this.infoValue = infoValue;
+    return this;
   }
 
   public void unsetInfoValue() {
@@ -283,19 +284,7 @@ public class TGetInfoResp implements org.apache.thrift.TBase<TGetInfoResp, TGetI
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_status = true && (isSetStatus());
-    builder.append(present_status);
-    if (present_status)
-      builder.append(status);
-
-    boolean present_infoValue = true && (isSetInfoValue());
-    builder.append(present_infoValue);
-    if (present_infoValue)
-      builder.append(infoValue);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TGetInfoResp other) {
@@ -367,14 +356,12 @@ public class TGetInfoResp implements org.apache.thrift.TBase<TGetInfoResp, TGetI
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetStatus()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' is unset! Struct:" + toString());
+    if (status == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' was not present! Struct: " + toString());
     }
-
-    if (!isSetInfoValue()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'infoValue' is unset! Struct:" + toString());
+    if (infoValue == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'infoValue' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (status != null) {
       status.validate();
@@ -439,6 +426,8 @@ public class TGetInfoResp implements org.apache.thrift.TBase<TGetInfoResp, TGetI
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

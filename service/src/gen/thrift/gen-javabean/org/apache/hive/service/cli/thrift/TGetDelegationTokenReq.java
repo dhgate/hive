@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -44,9 +43,9 @@ public class TGetDelegationTokenReq implements org.apache.thrift.TBase<TGetDeleg
     schemes.put(TupleScheme.class, new TGetDelegationTokenReqTupleSchemeFactory());
   }
 
-  private TSessionHandle sessionHandle; // required
-  private String owner; // required
-  private String renewer; // required
+  public TSessionHandle sessionHandle; // required
+  public String owner; // required
+  public String renewer; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -170,8 +169,9 @@ public class TGetDelegationTokenReq implements org.apache.thrift.TBase<TGetDeleg
     return this.sessionHandle;
   }
 
-  public void setSessionHandle(TSessionHandle sessionHandle) {
+  public TGetDelegationTokenReq setSessionHandle(TSessionHandle sessionHandle) {
     this.sessionHandle = sessionHandle;
+    return this;
   }
 
   public void unsetSessionHandle() {
@@ -193,8 +193,9 @@ public class TGetDelegationTokenReq implements org.apache.thrift.TBase<TGetDeleg
     return this.owner;
   }
 
-  public void setOwner(String owner) {
+  public TGetDelegationTokenReq setOwner(String owner) {
     this.owner = owner;
+    return this;
   }
 
   public void unsetOwner() {
@@ -216,8 +217,9 @@ public class TGetDelegationTokenReq implements org.apache.thrift.TBase<TGetDeleg
     return this.renewer;
   }
 
-  public void setRenewer(String renewer) {
+  public TGetDelegationTokenReq setRenewer(String renewer) {
     this.renewer = renewer;
+    return this;
   }
 
   public void unsetRenewer() {
@@ -341,24 +343,7 @@ public class TGetDelegationTokenReq implements org.apache.thrift.TBase<TGetDeleg
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_sessionHandle = true && (isSetSessionHandle());
-    builder.append(present_sessionHandle);
-    if (present_sessionHandle)
-      builder.append(sessionHandle);
-
-    boolean present_owner = true && (isSetOwner());
-    builder.append(present_owner);
-    if (present_owner)
-      builder.append(owner);
-
-    boolean present_renewer = true && (isSetRenewer());
-    builder.append(present_renewer);
-    if (present_renewer)
-      builder.append(renewer);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TGetDelegationTokenReq other) {
@@ -448,18 +433,15 @@ public class TGetDelegationTokenReq implements org.apache.thrift.TBase<TGetDeleg
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetSessionHandle()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' is unset! Struct:" + toString());
+    if (sessionHandle == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' was not present! Struct: " + toString());
     }
-
-    if (!isSetOwner()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'owner' is unset! Struct:" + toString());
+    if (owner == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'owner' was not present! Struct: " + toString());
     }
-
-    if (!isSetRenewer()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'renewer' is unset! Struct:" + toString());
+    if (renewer == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'renewer' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (sessionHandle != null) {
       sessionHandle.validate();
@@ -531,6 +513,8 @@ public class TGetDelegationTokenReq implements org.apache.thrift.TBase<TGetDeleg
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -43,8 +42,8 @@ public class TBinaryColumn implements org.apache.thrift.TBase<TBinaryColumn, TBi
     schemes.put(TupleScheme.class, new TBinaryColumnTupleSchemeFactory());
   }
 
-  private List<ByteBuffer> values; // required
-  private ByteBuffer nulls; // required
+  public List<ByteBuffer> values; // required
+  public ByteBuffer nulls; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -180,8 +179,9 @@ public class TBinaryColumn implements org.apache.thrift.TBase<TBinaryColumn, TBi
     return this.values;
   }
 
-  public void setValues(List<ByteBuffer> values) {
+  public TBinaryColumn setValues(List<ByteBuffer> values) {
     this.values = values;
+    return this;
   }
 
   public void unsetValues() {
@@ -208,12 +208,14 @@ public class TBinaryColumn implements org.apache.thrift.TBase<TBinaryColumn, TBi
     return nulls;
   }
 
-  public void setNulls(byte[] nulls) {
+  public TBinaryColumn setNulls(byte[] nulls) {
     setNulls(nulls == null ? (ByteBuffer)null : ByteBuffer.wrap(nulls));
+    return this;
   }
 
-  public void setNulls(ByteBuffer nulls) {
+  public TBinaryColumn setNulls(ByteBuffer nulls) {
     this.nulls = nulls;
+    return this;
   }
 
   public void unsetNulls() {
@@ -315,19 +317,7 @@ public class TBinaryColumn implements org.apache.thrift.TBase<TBinaryColumn, TBi
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_values = true && (isSetValues());
-    builder.append(present_values);
-    if (present_values)
-      builder.append(values);
-
-    boolean present_nulls = true && (isSetNulls());
-    builder.append(present_nulls);
-    if (present_nulls)
-      builder.append(nulls);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TBinaryColumn other) {
@@ -399,14 +389,12 @@ public class TBinaryColumn implements org.apache.thrift.TBase<TBinaryColumn, TBi
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetValues()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'values' is unset! Struct:" + toString());
+    if (values == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'values' was not present! Struct: " + toString());
     }
-
-    if (!isSetNulls()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'nulls' is unset! Struct:" + toString());
+    if (nulls == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'nulls' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
   }
 
@@ -476,6 +464,8 @@ public class TBinaryColumn implements org.apache.thrift.TBase<TBinaryColumn, TBi
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -46,11 +45,11 @@ public class TGetColumnsReq implements org.apache.thrift.TBase<TGetColumnsReq, T
     schemes.put(TupleScheme.class, new TGetColumnsReqTupleSchemeFactory());
   }
 
-  private TSessionHandle sessionHandle; // required
-  private String catalogName; // optional
-  private String schemaName; // optional
-  private String tableName; // optional
-  private String columnName; // optional
+  public TSessionHandle sessionHandle; // required
+  public String catalogName; // optional
+  public String schemaName; // optional
+  public String tableName; // optional
+  public String columnName; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -189,8 +188,9 @@ public class TGetColumnsReq implements org.apache.thrift.TBase<TGetColumnsReq, T
     return this.sessionHandle;
   }
 
-  public void setSessionHandle(TSessionHandle sessionHandle) {
+  public TGetColumnsReq setSessionHandle(TSessionHandle sessionHandle) {
     this.sessionHandle = sessionHandle;
+    return this;
   }
 
   public void unsetSessionHandle() {
@@ -212,8 +212,9 @@ public class TGetColumnsReq implements org.apache.thrift.TBase<TGetColumnsReq, T
     return this.catalogName;
   }
 
-  public void setCatalogName(String catalogName) {
+  public TGetColumnsReq setCatalogName(String catalogName) {
     this.catalogName = catalogName;
+    return this;
   }
 
   public void unsetCatalogName() {
@@ -235,8 +236,9 @@ public class TGetColumnsReq implements org.apache.thrift.TBase<TGetColumnsReq, T
     return this.schemaName;
   }
 
-  public void setSchemaName(String schemaName) {
+  public TGetColumnsReq setSchemaName(String schemaName) {
     this.schemaName = schemaName;
+    return this;
   }
 
   public void unsetSchemaName() {
@@ -258,8 +260,9 @@ public class TGetColumnsReq implements org.apache.thrift.TBase<TGetColumnsReq, T
     return this.tableName;
   }
 
-  public void setTableName(String tableName) {
+  public TGetColumnsReq setTableName(String tableName) {
     this.tableName = tableName;
+    return this;
   }
 
   public void unsetTableName() {
@@ -281,8 +284,9 @@ public class TGetColumnsReq implements org.apache.thrift.TBase<TGetColumnsReq, T
     return this.columnName;
   }
 
-  public void setColumnName(String columnName) {
+  public TGetColumnsReq setColumnName(String columnName) {
     this.columnName = columnName;
+    return this;
   }
 
   public void unsetColumnName() {
@@ -450,34 +454,7 @@ public class TGetColumnsReq implements org.apache.thrift.TBase<TGetColumnsReq, T
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_sessionHandle = true && (isSetSessionHandle());
-    builder.append(present_sessionHandle);
-    if (present_sessionHandle)
-      builder.append(sessionHandle);
-
-    boolean present_catalogName = true && (isSetCatalogName());
-    builder.append(present_catalogName);
-    if (present_catalogName)
-      builder.append(catalogName);
-
-    boolean present_schemaName = true && (isSetSchemaName());
-    builder.append(present_schemaName);
-    if (present_schemaName)
-      builder.append(schemaName);
-
-    boolean present_tableName = true && (isSetTableName());
-    builder.append(present_tableName);
-    if (present_tableName)
-      builder.append(tableName);
-
-    boolean present_columnName = true && (isSetColumnName());
-    builder.append(present_columnName);
-    if (present_columnName)
-      builder.append(columnName);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TGetColumnsReq other) {
@@ -611,10 +588,9 @@ public class TGetColumnsReq implements org.apache.thrift.TBase<TGetColumnsReq, T
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetSessionHandle()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' is unset! Struct:" + toString());
+    if (sessionHandle == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (sessionHandle != null) {
       sessionHandle.validate();
@@ -702,6 +678,8 @@ public class TGetColumnsReq implements org.apache.thrift.TBase<TGetColumnsReq, T
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

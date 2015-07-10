@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -45,10 +44,10 @@ public class TGetFunctionsReq implements org.apache.thrift.TBase<TGetFunctionsRe
     schemes.put(TupleScheme.class, new TGetFunctionsReqTupleSchemeFactory());
   }
 
-  private TSessionHandle sessionHandle; // required
-  private String catalogName; // optional
-  private String schemaName; // optional
-  private String functionName; // required
+  public TSessionHandle sessionHandle; // required
+  public String catalogName; // optional
+  public String schemaName; // optional
+  public String functionName; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -180,8 +179,9 @@ public class TGetFunctionsReq implements org.apache.thrift.TBase<TGetFunctionsRe
     return this.sessionHandle;
   }
 
-  public void setSessionHandle(TSessionHandle sessionHandle) {
+  public TGetFunctionsReq setSessionHandle(TSessionHandle sessionHandle) {
     this.sessionHandle = sessionHandle;
+    return this;
   }
 
   public void unsetSessionHandle() {
@@ -203,8 +203,9 @@ public class TGetFunctionsReq implements org.apache.thrift.TBase<TGetFunctionsRe
     return this.catalogName;
   }
 
-  public void setCatalogName(String catalogName) {
+  public TGetFunctionsReq setCatalogName(String catalogName) {
     this.catalogName = catalogName;
+    return this;
   }
 
   public void unsetCatalogName() {
@@ -226,8 +227,9 @@ public class TGetFunctionsReq implements org.apache.thrift.TBase<TGetFunctionsRe
     return this.schemaName;
   }
 
-  public void setSchemaName(String schemaName) {
+  public TGetFunctionsReq setSchemaName(String schemaName) {
     this.schemaName = schemaName;
+    return this;
   }
 
   public void unsetSchemaName() {
@@ -249,8 +251,9 @@ public class TGetFunctionsReq implements org.apache.thrift.TBase<TGetFunctionsRe
     return this.functionName;
   }
 
-  public void setFunctionName(String functionName) {
+  public TGetFunctionsReq setFunctionName(String functionName) {
     this.functionName = functionName;
+    return this;
   }
 
   public void unsetFunctionName() {
@@ -396,29 +399,7 @@ public class TGetFunctionsReq implements org.apache.thrift.TBase<TGetFunctionsRe
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_sessionHandle = true && (isSetSessionHandle());
-    builder.append(present_sessionHandle);
-    if (present_sessionHandle)
-      builder.append(sessionHandle);
-
-    boolean present_catalogName = true && (isSetCatalogName());
-    builder.append(present_catalogName);
-    if (present_catalogName)
-      builder.append(catalogName);
-
-    boolean present_schemaName = true && (isSetSchemaName());
-    builder.append(present_schemaName);
-    if (present_schemaName)
-      builder.append(schemaName);
-
-    boolean present_functionName = true && (isSetFunctionName());
-    builder.append(present_functionName);
-    if (present_functionName)
-      builder.append(functionName);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TGetFunctionsReq other) {
@@ -530,14 +511,12 @@ public class TGetFunctionsReq implements org.apache.thrift.TBase<TGetFunctionsRe
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetSessionHandle()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' is unset! Struct:" + toString());
+    if (sessionHandle == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionHandle' was not present! Struct: " + toString());
     }
-
-    if (!isSetFunctionName()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'functionName' is unset! Struct:" + toString());
+    if (functionName == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'functionName' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (sessionHandle != null) {
       sessionHandle.validate();
@@ -617,6 +596,8 @@ public class TGetFunctionsReq implements org.apache.thrift.TBase<TGetFunctionsRe
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

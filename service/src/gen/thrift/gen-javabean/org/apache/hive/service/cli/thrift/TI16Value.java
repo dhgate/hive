@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TI16Value implements org.apache.thrift.TBase<TI16Value, TI16Value._
     schemes.put(TupleScheme.class, new TI16ValueTupleSchemeFactory());
   }
 
-  private short value; // optional
+  public short value; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -140,9 +139,10 @@ public class TI16Value implements org.apache.thrift.TBase<TI16Value, TI16Value._
     return this.value;
   }
 
-  public void setValue(short value) {
+  public TI16Value setValue(short value) {
     this.value = value;
     setValueIsSet(true);
+    return this;
   }
 
   public void unsetValue() {
@@ -220,14 +220,7 @@ public class TI16Value implements org.apache.thrift.TBase<TI16Value, TI16Value._
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_value = true && (isSetValue());
-    builder.append(present_value);
-    if (present_value)
-      builder.append(value);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TI16Value other) {
@@ -332,6 +325,8 @@ public class TI16Value implements org.apache.thrift.TBase<TI16Value, TI16Value._
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

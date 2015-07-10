@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TSessionHandle implements org.apache.thrift.TBase<TSessionHandle, T
     schemes.put(TupleScheme.class, new TSessionHandleTupleSchemeFactory());
   }
 
-  private THandleIdentifier sessionId; // required
+  public THandleIdentifier sessionId; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -144,8 +143,9 @@ public class TSessionHandle implements org.apache.thrift.TBase<TSessionHandle, T
     return this.sessionId;
   }
 
-  public void setSessionId(THandleIdentifier sessionId) {
+  public TSessionHandle setSessionId(THandleIdentifier sessionId) {
     this.sessionId = sessionId;
+    return this;
   }
 
   public void unsetSessionId() {
@@ -225,14 +225,7 @@ public class TSessionHandle implements org.apache.thrift.TBase<TSessionHandle, T
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_sessionId = true && (isSetSessionId());
-    builder.append(present_sessionId);
-    if (present_sessionId)
-      builder.append(sessionId);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TSessionHandle other) {
@@ -286,10 +279,9 @@ public class TSessionHandle implements org.apache.thrift.TBase<TSessionHandle, T
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetSessionId()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionId' is unset! Struct:" + toString());
+    if (sessionId == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'sessionId' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (sessionId != null) {
       sessionId.validate();
@@ -345,6 +337,8 @@ public class TSessionHandle implements org.apache.thrift.TBase<TSessionHandle, T
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

@@ -44,6 +44,7 @@ import org.apache.hadoop.security.UserGroupInformation;
 import org.apache.hive.service.CompositeService;
 import org.apache.hive.service.ServiceException;
 import org.apache.hive.service.auth.HiveAuthFactory;
+import org.apache.hive.service.cli.log.OperationLog;
 import org.apache.hive.service.cli.operation.Operation;
 import org.apache.hive.service.cli.session.SessionManager;
 import org.apache.hive.service.cli.thrift.TProtocolVersion;
@@ -331,6 +332,7 @@ public class CLIService extends CompositeService implements ICLIService {
   @Override
   public OperationStatus getOperationStatus(OperationHandle opHandle)
       throws HiveSQLException {
+    startLogCapture(opHandle);
     Operation operation = sessionManager.getOperationManager().getOperation(opHandle);
     /**
      * If this is a background operation run asynchronously,
@@ -358,6 +360,7 @@ public class CLIService extends CompositeService implements ICLIService {
       }
     }
     OperationStatus opStatus = operation.getStatus();
+    stopLogCapture();
     LOG.debug(opHandle + ": getOperationStatus()");
     return opStatus;
   }
@@ -368,8 +371,10 @@ public class CLIService extends CompositeService implements ICLIService {
   @Override
   public void cancelOperation(OperationHandle opHandle)
       throws HiveSQLException {
+    startLogCapture(opHandle);
     sessionManager.getOperationManager().getOperation(opHandle)
     .getParentSession().cancelOperation(opHandle);
+    stopLogCapture();
     LOG.debug(opHandle + ": cancelOperation()");
   }
 
@@ -379,8 +384,10 @@ public class CLIService extends CompositeService implements ICLIService {
   @Override
   public void closeOperation(OperationHandle opHandle)
       throws HiveSQLException {
+    startLogCapture(opHandle);
     sessionManager.getOperationManager().getOperation(opHandle)
     .getParentSession().closeOperation(opHandle);
+    stopLogCapture();
     LOG.debug(opHandle + ": closeOperation");
   }
 
@@ -390,8 +397,10 @@ public class CLIService extends CompositeService implements ICLIService {
   @Override
   public TableSchema getResultSetMetadata(OperationHandle opHandle)
       throws HiveSQLException {
+    startLogCapture(opHandle);
     TableSchema tableSchema = sessionManager.getOperationManager()
         .getOperation(opHandle).getParentSession().getResultSetMetadata(opHandle);
+    stopLogCapture();
     LOG.debug(opHandle + ": getResultSetMetadata()");
     return tableSchema;
   }
@@ -402,8 +411,10 @@ public class CLIService extends CompositeService implements ICLIService {
   @Override
   public RowSet fetchResults(OperationHandle opHandle, FetchOrientation orientation, long maxRows)
       throws HiveSQLException {
+    startLogCapture(opHandle);
     RowSet rowSet = sessionManager.getOperationManager().getOperation(opHandle)
         .getParentSession().fetchResults(opHandle, orientation, maxRows);
+    stopLogCapture();
     LOG.debug(opHandle + ": fetchResults()");
     return rowSet;
   }
@@ -414,8 +425,10 @@ public class CLIService extends CompositeService implements ICLIService {
   @Override
   public RowSet fetchResults(OperationHandle opHandle)
       throws HiveSQLException {
+    startLogCapture(opHandle);
     RowSet rowSet = sessionManager.getOperationManager().getOperation(opHandle)
         .getParentSession().fetchResults(opHandle);
+    stopLogCapture();
     LOG.debug(opHandle + ": fetchResults()");
     return rowSet;
   }
@@ -479,5 +492,26 @@ public class CLIService extends CompositeService implements ICLIService {
       String tokenStr) throws HiveSQLException {
     sessionManager.getSession(sessionHandle).renewDelegationToken(authFactory, tokenStr);
     LOG.info(sessionHandle  + ": renewDelegationToken()");
+  }
+
+  /* (non-Javadoc)
+  *    * @see org.apache.hive.service.cli.ICLIService#getLog(org.apache.hive.service.cli.OperationHandle)
+  *    *       */
+  @Override
+  public String getLog(OperationHandle opHandle)
+      throws HiveSQLException {
+     OperationLog log = sessionManager.getLogManager().getOperationLogByOperation(opHandle, false);
+     LOG.info(opHandle  + ": getLog()");
+     sessionManager.clearIpAddress();
+     return log.readOperationLog();
+  }
+
+  private void startLogCapture(OperationHandle operationHandle) throws HiveSQLException {
+    sessionManager.getLogManager().unregisterCurrentThread();
+    sessionManager.getLogManager().registerCurrentThread(operationHandle);
+  }
+
+  private void stopLogCapture() {
+    sessionManager.getLogManager().unregisterCurrentThread();
   }
 }

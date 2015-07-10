@@ -102,5 +102,7 @@ public interface ICLIService {
   public abstract void renewDelegationToken(SessionHandle sessionHandle, HiveAuthFactory authFactory,
       String tokenStr) throws HiveSQLException;
 
+  public abstract String getLog(OperationHandle opHandle)
+      throws HiveSQLException;
 
 }

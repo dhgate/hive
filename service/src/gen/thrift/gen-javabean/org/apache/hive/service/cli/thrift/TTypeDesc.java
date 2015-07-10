@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TTypeDesc implements org.apache.thrift.TBase<TTypeDesc, TTypeDesc._
     schemes.put(TupleScheme.class, new TTypeDescTupleSchemeFactory());
   }
 
-  private List<TTypeEntry> types; // required
+  public List<TTypeEntry> types; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -164,8 +163,9 @@ public class TTypeDesc implements org.apache.thrift.TBase<TTypeDesc, TTypeDesc._
     return this.types;
   }
 
-  public void setTypes(List<TTypeEntry> types) {
+  public TTypeDesc setTypes(List<TTypeEntry> types) {
     this.types = types;
+    return this;
   }
 
   public void unsetTypes() {
@@ -245,14 +245,7 @@ public class TTypeDesc implements org.apache.thrift.TBase<TTypeDesc, TTypeDesc._
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_types = true && (isSetTypes());
-    builder.append(present_types);
-    if (present_types)
-      builder.append(types);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TTypeDesc other) {
@@ -306,10 +299,9 @@ public class TTypeDesc implements org.apache.thrift.TBase<TTypeDesc, TTypeDesc._
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetTypes()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'types' is unset! Struct:" + toString());
+    if (types == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'types' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
   }
 
@@ -372,6 +364,8 @@ public class TTypeDesc implements org.apache.thrift.TBase<TTypeDesc, TTypeDesc._
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

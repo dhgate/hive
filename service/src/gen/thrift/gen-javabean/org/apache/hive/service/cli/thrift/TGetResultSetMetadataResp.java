@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -43,8 +42,8 @@ public class TGetResultSetMetadataResp implements org.apache.thrift.TBase<TGetRe
     schemes.put(TupleScheme.class, new TGetResultSetMetadataRespTupleSchemeFactory());
   }
 
-  private TStatus status; // required
-  private TTableSchema schema; // optional
+  public TStatus status; // required
+  public TTableSchema schema; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -156,8 +155,9 @@ public class TGetResultSetMetadataResp implements org.apache.thrift.TBase<TGetRe
     return this.status;
   }
 
-  public void setStatus(TStatus status) {
+  public TGetResultSetMetadataResp setStatus(TStatus status) {
     this.status = status;
+    return this;
   }
 
   public void unsetStatus() {
@@ -179,8 +179,9 @@ public class TGetResultSetMetadataResp implements org.apache.thrift.TBase<TGetRe
     return this.schema;
   }
 
-  public void setSchema(TTableSchema schema) {
+  public TGetResultSetMetadataResp setSchema(TTableSchema schema) {
     this.schema = schema;
+    return this;
   }
 
   public void unsetSchema() {
@@ -282,19 +283,7 @@ public class TGetResultSetMetadataResp implements org.apache.thrift.TBase<TGetRe
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_status = true && (isSetStatus());
-    builder.append(present_status);
-    if (present_status)
-      builder.append(status);
-
-    boolean present_schema = true && (isSetSchema());
-    builder.append(present_schema);
-    if (present_schema)
-      builder.append(schema);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TGetResultSetMetadataResp other) {
@@ -368,10 +357,9 @@ public class TGetResultSetMetadataResp implements org.apache.thrift.TBase<TGetRe
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetStatus()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' is unset! Struct:" + toString());
+    if (status == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (status != null) {
       status.validate();
@@ -439,6 +427,8 @@ public class TGetResultSetMetadataResp implements org.apache.thrift.TBase<TGetRe
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

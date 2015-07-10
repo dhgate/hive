@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TUnionTypeEntry implements org.apache.thrift.TBase<TUnionTypeEntry,
     schemes.put(TupleScheme.class, new TUnionTypeEntryTupleSchemeFactory());
   }
 
-  private Map<String,Integer> nameToTypePtr; // required
+  public Map<String,Integer> nameToTypePtr; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -169,8 +168,9 @@ public class TUnionTypeEntry implements org.apache.thrift.TBase<TUnionTypeEntry,
     return this.nameToTypePtr;
   }
 
-  public void setNameToTypePtr(Map<String,Integer> nameToTypePtr) {
+  public TUnionTypeEntry setNameToTypePtr(Map<String,Integer> nameToTypePtr) {
     this.nameToTypePtr = nameToTypePtr;
+    return this;
   }
 
   public void unsetNameToTypePtr() {
@@ -250,14 +250,7 @@ public class TUnionTypeEntry implements org.apache.thrift.TBase<TUnionTypeEntry,
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_nameToTypePtr = true && (isSetNameToTypePtr());
-    builder.append(present_nameToTypePtr);
-    if (present_nameToTypePtr)
-      builder.append(nameToTypePtr);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TUnionTypeEntry other) {
@@ -311,10 +304,9 @@ public class TUnionTypeEntry implements org.apache.thrift.TBase<TUnionTypeEntry,
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetNameToTypePtr()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'nameToTypePtr' is unset! Struct:" + toString());
+    if (nameToTypePtr == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'nameToTypePtr' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
   }
 
@@ -378,6 +370,8 @@ public class TUnionTypeEntry implements org.apache.thrift.TBase<TUnionTypeEntry,
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

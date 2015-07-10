@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TStringValue implements org.apache.thrift.TBase<TStringValue, TStri
     schemes.put(TupleScheme.class, new TStringValueTupleSchemeFactory());
   }
 
-  private String value; // optional
+  public String value; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -138,8 +137,9 @@ public class TStringValue implements org.apache.thrift.TBase<TStringValue, TStri
     return this.value;
   }
 
-  public void setValue(String value) {
+  public TStringValue setValue(String value) {
     this.value = value;
+    return this;
   }
 
   public void unsetValue() {
@@ -219,14 +219,7 @@ public class TStringValue implements org.apache.thrift.TBase<TStringValue, TStri
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_value = true && (isSetValue());
-    builder.append(present_value);
-    if (present_value)
-      builder.append(value);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TStringValue other) {
@@ -333,6 +326,8 @@ public class TStringValue implements org.apache.thrift.TBase<TStringValue, TStri
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

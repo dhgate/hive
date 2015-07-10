@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TArrayTypeEntry implements org.apache.thrift.TBase<TArrayTypeEntry,
     schemes.put(TupleScheme.class, new TArrayTypeEntryTupleSchemeFactory());
   }
 
-  private int objectTypePtr; // required
+  public int objectTypePtr; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -147,9 +146,10 @@ public class TArrayTypeEntry implements org.apache.thrift.TBase<TArrayTypeEntry,
     return this.objectTypePtr;
   }
 
-  public void setObjectTypePtr(int objectTypePtr) {
+  public TArrayTypeEntry setObjectTypePtr(int objectTypePtr) {
     this.objectTypePtr = objectTypePtr;
     setObjectTypePtrIsSet(true);
+    return this;
   }
 
   public void unsetObjectTypePtr() {
@@ -227,14 +227,7 @@ public class TArrayTypeEntry implements org.apache.thrift.TBase<TArrayTypeEntry,
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_objectTypePtr = true;
-    builder.append(present_objectTypePtr);
-    if (present_objectTypePtr)
-      builder.append(objectTypePtr);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TArrayTypeEntry other) {
@@ -284,10 +277,7 @@ public class TArrayTypeEntry implements org.apache.thrift.TBase<TArrayTypeEntry,
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetObjectTypePtr()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'objectTypePtr' is unset! Struct:" + toString());
-    }
-
+    // alas, we cannot check 'objectTypePtr' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
   }
 
@@ -341,6 +331,11 @@ public class TArrayTypeEntry implements org.apache.thrift.TBase<TArrayTypeEntry,
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      if (!struct.isSetObjectTypePtr()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'objectTypePtr' was not found in serialized data! Struct: " + toString());
+      }
       struct.validate();
     }
 

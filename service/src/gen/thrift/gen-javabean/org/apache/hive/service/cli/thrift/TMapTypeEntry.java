@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -43,8 +42,8 @@ public class TMapTypeEntry implements org.apache.thrift.TBase<TMapTypeEntry, TMa
     schemes.put(TupleScheme.class, new TMapTypeEntryTupleSchemeFactory());
   }
 
-  private int keyTypePtr; // required
-  private int valueTypePtr; // required
+  public int keyTypePtr; // required
+  public int valueTypePtr; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -161,9 +160,10 @@ public class TMapTypeEntry implements org.apache.thrift.TBase<TMapTypeEntry, TMa
     return this.keyTypePtr;
   }
 
-  public void setKeyTypePtr(int keyTypePtr) {
+  public TMapTypeEntry setKeyTypePtr(int keyTypePtr) {
     this.keyTypePtr = keyTypePtr;
     setKeyTypePtrIsSet(true);
+    return this;
   }
 
   public void unsetKeyTypePtr() {
@@ -183,9 +183,10 @@ public class TMapTypeEntry implements org.apache.thrift.TBase<TMapTypeEntry, TMa
     return this.valueTypePtr;
   }
 
-  public void setValueTypePtr(int valueTypePtr) {
+  public TMapTypeEntry setValueTypePtr(int valueTypePtr) {
     this.valueTypePtr = valueTypePtr;
     setValueTypePtrIsSet(true);
+    return this;
   }
 
   public void unsetValueTypePtr() {
@@ -285,19 +286,7 @@ public class TMapTypeEntry implements org.apache.thrift.TBase<TMapTypeEntry, TMa
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_keyTypePtr = true;
-    builder.append(present_keyTypePtr);
-    if (present_keyTypePtr)
-      builder.append(keyTypePtr);
-
-    boolean present_valueTypePtr = true;
-    builder.append(present_valueTypePtr);
-    if (present_valueTypePtr)
-      builder.append(valueTypePtr);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TMapTypeEntry other) {
@@ -361,14 +350,8 @@ public class TMapTypeEntry implements org.apache.thrift.TBase<TMapTypeEntry, TMa
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetKeyTypePtr()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'keyTypePtr' is unset! Struct:" + toString());
-    }
-
-    if (!isSetValueTypePtr()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'valueTypePtr' is unset! Struct:" + toString());
-    }
-
+    // alas, we cannot check 'keyTypePtr' because it's a primitive and you chose the non-beans generator.
+    // alas, we cannot check 'valueTypePtr' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
   }
 
@@ -430,6 +413,14 @@ public class TMapTypeEntry implements org.apache.thrift.TBase<TMapTypeEntry, TMa
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      if (!struct.isSetKeyTypePtr()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'keyTypePtr' was not found in serialized data! Struct: " + toString());
+      }
+      if (!struct.isSetValueTypePtr()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'valueTypePtr' was not found in serialized data! Struct: " + toString());
+      }
       struct.validate();
     }
 

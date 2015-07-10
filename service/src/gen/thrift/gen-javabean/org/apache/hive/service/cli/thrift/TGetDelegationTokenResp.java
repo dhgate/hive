@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -43,8 +42,8 @@ public class TGetDelegationTokenResp implements org.apache.thrift.TBase<TGetDele
     schemes.put(TupleScheme.class, new TGetDelegationTokenRespTupleSchemeFactory());
   }
 
-  private TStatus status; // required
-  private String delegationToken; // optional
+  public TStatus status; // required
+  public String delegationToken; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -156,8 +155,9 @@ public class TGetDelegationTokenResp implements org.apache.thrift.TBase<TGetDele
     return this.status;
   }
 
-  public void setStatus(TStatus status) {
+  public TGetDelegationTokenResp setStatus(TStatus status) {
     this.status = status;
+    return this;
   }
 
   public void unsetStatus() {
@@ -179,8 +179,9 @@ public class TGetDelegationTokenResp implements org.apache.thrift.TBase<TGetDele
     return this.delegationToken;
   }
 
-  public void setDelegationToken(String delegationToken) {
+  public TGetDelegationTokenResp setDelegationToken(String delegationToken) {
     this.delegationToken = delegationToken;
+    return this;
   }
 
   public void unsetDelegationToken() {
@@ -282,19 +283,7 @@ public class TGetDelegationTokenResp implements org.apache.thrift.TBase<TGetDele
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_status = true && (isSetStatus());
-    builder.append(present_status);
-    if (present_status)
-      builder.append(status);
-
-    boolean present_delegationToken = true && (isSetDelegationToken());
-    builder.append(present_delegationToken);
-    if (present_delegationToken)
-      builder.append(delegationToken);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TGetDelegationTokenResp other) {
@@ -368,10 +357,9 @@ public class TGetDelegationTokenResp implements org.apache.thrift.TBase<TGetDele
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetStatus()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' is unset! Struct:" + toString());
+    if (status == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
     if (status != null) {
       status.validate();
@@ -435,6 +423,8 @@ public class TGetDelegationTokenResp implements org.apache.thrift.TBase<TGetDele
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TTableSchema implements org.apache.thrift.TBase<TTableSchema, TTabl
     schemes.put(TupleScheme.class, new TTableSchemaTupleSchemeFactory());
   }
 
-  private List<TColumnDesc> columns; // required
+  public List<TColumnDesc> columns; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -164,8 +163,9 @@ public class TTableSchema implements org.apache.thrift.TBase<TTableSchema, TTabl
     return this.columns;
   }
 
-  public void setColumns(List<TColumnDesc> columns) {
+  public TTableSchema setColumns(List<TColumnDesc> columns) {
     this.columns = columns;
+    return this;
   }
 
   public void unsetColumns() {
@@ -245,14 +245,7 @@ public class TTableSchema implements org.apache.thrift.TBase<TTableSchema, TTabl
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_columns = true && (isSetColumns());
-    builder.append(present_columns);
-    if (present_columns)
-      builder.append(columns);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TTableSchema other) {
@@ -306,10 +299,9 @@ public class TTableSchema implements org.apache.thrift.TBase<TTableSchema, TTabl
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetColumns()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'columns' is unset! Struct:" + toString());
+    if (columns == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'columns' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
   }
 
@@ -372,6 +364,8 @@ public class TTableSchema implements org.apache.thrift.TBase<TTableSchema, TTabl
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 

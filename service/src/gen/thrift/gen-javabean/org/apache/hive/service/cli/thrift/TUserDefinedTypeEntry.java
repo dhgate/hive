@@ -6,7 +6,6 @@
  */
 package org.apache.hive.service.cli.thrift;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -42,7 +41,7 @@ public class TUserDefinedTypeEntry implements org.apache.thrift.TBase<TUserDefin
     schemes.put(TupleScheme.class, new TUserDefinedTypeEntryTupleSchemeFactory());
   }
 
-  private String typeClassName; // required
+  public String typeClassName; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -144,8 +143,9 @@ public class TUserDefinedTypeEntry implements org.apache.thrift.TBase<TUserDefin
     return this.typeClassName;
   }
 
-  public void setTypeClassName(String typeClassName) {
+  public TUserDefinedTypeEntry setTypeClassName(String typeClassName) {
     this.typeClassName = typeClassName;
+    return this;
   }
 
   public void unsetTypeClassName() {
@@ -225,14 +225,7 @@ public class TUserDefinedTypeEntry implements org.apache.thrift.TBase<TUserDefin
 
   @Override
   public int hashCode() {
-    HashCodeBuilder builder = new HashCodeBuilder();
-
-    boolean present_typeClassName = true && (isSetTypeClassName());
-    builder.append(present_typeClassName);
-    if (present_typeClassName)
-      builder.append(typeClassName);
-
-    return builder.toHashCode();
+    return 0;
   }
 
   public int compareTo(TUserDefinedTypeEntry other) {
@@ -286,10 +279,9 @@ public class TUserDefinedTypeEntry implements org.apache.thrift.TBase<TUserDefin
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetTypeClassName()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'typeClassName' is unset! Struct:" + toString());
+    if (typeClassName == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'typeClassName' was not present! Struct: " + toString());
     }
-
     // check for sub-struct validity
   }
 
@@ -341,6 +333,8 @@ public class TUserDefinedTypeEntry implements org.apache.thrift.TBase<TUserDefin
         iprot.readFieldEnd();
       }
       iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
       struct.validate();
     }
 
